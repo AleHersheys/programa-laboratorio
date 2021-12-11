@@ -25,17 +25,17 @@
 
             $cliente = mysqli_fetch_array($peticion2);
 
-            $mpdf = new mPDF();
+            $mpdf = new \Mpdf\Mpdf();
 
             $data = '';
             $data .= '<h1>Detalles de examen:</h1>';
 
-            $data .= '<strong>Nombre del paciente:</strong>' . $cliente['nombre'] . '</br>';
-            $data .= '<strong>Nombre del doctor:</strong>' . $persona['nombre'] . '</br>';
+            $data .= '<strong>Nombre del paciente:</strong>' . $cliente['nombre'] . '<br/>';
+            $data .= '<strong>Nombre del doctor:</strong>' . $persona['nombre'] . '<br/>';
 
             foreach($examenes as $examen) {
-                $data .= '<strong>Tipo de examen:</strong>' . $examen['tipo'] . '</br>';
-                $data .= '<strong>Resultados:</strong>' . $examen['resultados'] . '</br>';
+                $data .= '<strong>Tipo de examen:</strong>' . $examen['tipo'] . '<br/>';
+                $data .= '<strong>Resultados:</strong>' . $examen['resultados'] . '<br/>';
             }
 
             $mpdf->WriteHTML($data);
@@ -109,7 +109,7 @@
                 <input type="text" name="examen[<?= $examen['id'] ?>]" placeholder="Ingrese los resultados del examen" value="<?= $examen['resultados'] ?>">
                 <a href="./verexamen.php?examen=<?php echo $examen['id'] ?>" class="botonepico">Borrar examen</a>
             <?php endforeach ?>
-            <a href="./verexamen.php?id=<?php echo $cliente['id'] ?>" class="botonepico">Enviar exámenes por correo</a>
+            <a href="./verexamen.php?id=<?php echo $cliente['id'] ?>" class="botonepico">Descargar exámenes</a>
             <div class="separador"></div>
         <?php endforeach;?>
         <?php if (count($datosCliente) <= 0): ?>

@@ -1,6 +1,6 @@
 <?php
     include_once ("../db/database.php");
-    include_once ("./seguridad.php");
+    session_start();
 
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -9,7 +9,7 @@
       $nombre = strtolower($nombre);
       $contraseña = $_POST['contraseña'];
 
-    $peticion = peticion("SELECT * FROM userlab WHERE contraseña='".md5($contraseña)."' AND (usuario='$nombre' OR correo='$nombre')");
+    $peticion = peticion("SELECT * FROM userlab WHERE contrasena='".md5($contraseña)."' AND (usuario='$nombre' OR correo='$nombre')");
 
         if(mysqli_num_rows($peticion) > 0) {
             $_SESSION['usuario'] = mysqli_fetch_array($peticion);
